@@ -1,0 +1,26 @@
+{
+    "name": "shit-template-lang",
+    "displayName": "Shit Template Language",
+    "description": "Shit mountain generator template language support",
+    "publisher": "Kelly",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.61.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "shit-tmpl",
+            "aliases": ["Shit Mountain Template", "shit-tmpl"],
+            "extensions": [".tmpl"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "shit-tmpl",
+            "scopeName": "source.shit-tmpl",
+            "path": "./syntaxes/shit-tmpl.tmLanguage.json"
+        }]
+    }
+}

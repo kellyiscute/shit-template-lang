@@ -1,0 +1,179 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "ShitMountainTemplate",
+	"patterns": [
+		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#functions"
+		},
+		{
+			"include": "#variables"
+		},
+		{
+			"include": "#tmpl.attrs"
+		},
+		{
+			"include": "#select.attrs"
+		},
+		{
+			"include": "#loop"
+		}
+	],
+	"repository": {
+		"keywords": {
+			"patterns": [
+				{
+					"name": "entity.name.tag.shit-tmpl",
+					"match": "(?<=^</?)(tmpl)|(select)"
+				},
+				{
+					"match": "(^\\s*)(</?)((case)|(default))",
+					"captures": {
+						"3": {
+							"name": "entity.name.tag.shit-tmpl"
+						}
+					}
+				}
+			]
+		},
+		"attrs-name": {
+			"patterns": [{
+				"match": "\\s+(name)(=)(\")((\\$main\\$)|([A-z_\\-]*))(\")",
+				"captures": {
+					"1": {
+						"name": "entity.other.attribute-name"
+					},
+					"2": {
+						"name": "keyword.operator"
+					},
+					"3": {
+						"name": "keyword.control"
+					},
+					"5": {
+						"name": "keyword.control"
+					},
+					"6": {
+						"name": "variable.name"
+					},
+					"7": {
+						"name": "keyword.control"
+					}
+				}
+			}]
+		},
+		"tmpl.attrs": {
+			"begin": "^<(tmpl)",
+			"end": ">",
+			"captures": {
+				"1": {
+					"name": "entity.name.tag"
+				}
+			},
+			"patterns": [
+				{"include": "#attrs-name"}
+			]
+		},
+		"select.attrs": {
+			"begin": "^<(select)",
+			"end": ">",
+			"captures": {
+				"1": {
+					"name": "entity.name.tag"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#attrs-name"
+				},
+				{
+					"match": "\\s+(var)(=)(\")([A-z_\\-]*)(\")",
+					"captures": {
+						"1": {
+							"name": "entity.other.attribute-name"
+						},
+						"2": {
+							"name": "keyword.operator"
+						},
+						"3": {
+							"name": "keyword.control"
+						},
+						"4": {
+							"name": "variable.name"
+						},
+						"5": {
+							"name": "keyword.control"
+						}
+					}
+				}
+			]
+		},
+		"loop": {
+			"begin": "{%\\s*",
+			"end": "%}\\s*",
+			"name": "keyword.control",
+			"patterns": [
+				{
+					"match": "[A-z_][A-z_0-9]*",
+					"name": "variable.name"
+				},
+				{
+					"match": "<-",
+					"name": "keyword.control"
+				}
+			]
+		},
+		"functions": {
+			"patterns": [
+				{
+					"match": "(?<={{\\s*)([a-z]*)(\\()([A-z_][A-z_0-9]*)(\\))",
+					"captures": {
+						"1": {
+							"name": "support.function"
+						},
+						"2": {
+							"name":"keyword.operator"
+						},
+						"3": {
+							"name": "support.variable"
+						},
+						"4": {
+							"name": "keyword.operator"
+						}
+					}
+				}
+			]
+		},
+		"variables": {
+			"patterns": [
+				{
+					"match": "({{)\\s*([A-z_][A-z_0-9]*)\\s*(}})",
+					"captures": {
+						"1": {
+							"name": "keyword.control"
+						}, 
+						"2": {
+							"name": "variable.name"
+						},
+						"3": {
+							"name": "keyword.control"
+						}
+					}
+				}
+			]
+		},
+		"strings": {
+			"name": "string.quoted.double.shit-tmpl",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"name": "constant.character.escape.shit-tmpl",
+					"match": "\\\\."
+				}
+			]
+		}
+	},
+	"scopeName": "source.shit-tmpl"
+}
