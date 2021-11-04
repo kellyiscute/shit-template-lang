@@ -4,6 +4,7 @@
     "description": "Shit mountain generator template language support",
     "publisher": "Kelly",
     "version": "0.0.1",
+    "repository": "https://github.com/guo40020/shit-template-lang",
     "engines": {
         "vscode": "^1.61.0"
     },
